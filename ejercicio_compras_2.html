@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - compras</title>
+</head>
+<body>
+    <h1>Ejercicio 2 - compras</h1>
+
+    <script>
+        var cartera = 100
+        var productos = [
+                            {  
+                                nombre : 'pasta',
+                                precio: 15
+                            },
+                            {  
+                                nombre : 'pan',
+                                precio: 1
+                            },
+                            {  
+                                nombre : 'cerveza',
+                                precio: 2
+                            },
+                            {  
+                                nombre : 'caba',
+                                precio: 10
+                            },
+                            {  
+                                nombre : 'cocacola',
+                                precio: 3
+                            },
+                            {  
+                                nombre : 'carne',
+                                precio: 5
+                            },
+                            {  
+                                nombre : 'verdura',
+                                precio: 3
+                            },
+                            {  
+                                nombre : 'bote lentejas',
+                                precio: 2
+                            }
+                        ]
+    function compras(wallet,products){
+        var carrito = []
+
+        productos.forEach(product => {
+            if(wallet < product.precio){
+                return
+            }
+            wallet = wallet - product.precio
+            carrito.push(product)
+        })
+
+        // for (const product of products) {
+        //     console.log(product.nombre)
+        // }
+
+        return {chart: carrito,wal: wallet}
+    }
+
+    var resultado = compras(cartera,productos)
+
+    cartera = cartera - resultado.wal
+    console.log(cartera)
+
+    console.table(resultado.chart)
+
+    </script>
+</body>
+</html>
