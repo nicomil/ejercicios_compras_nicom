@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - compras</title>
+</head>
+<body>
+    <h1>Ejercicio 1 - Compras</h1>
+    <span id="cartera"></span>
+
+    <script>
+        var cartera = 15
+        const productos = ["agua","pan",'cerveza','cocacola',"carne",'tomate','papas','olivas']
+
+        function compra(cartera,productos){
+            var carrito = []
+            for (const producto of productos) {
+                // verificar que tenga suficiente dinero 
+                if(cartera <= 0){
+                    break
+                }
+                
+                // quito una unidad de mi cartera 
+                cartera--
+                // poner el producto en el carrito
+                carrito.push(producto)
+            
+            }
+
+            return [carrito,cartera]
+        }
+        var resultado = compra(cartera,productos)
+        console.log(resultado)
+        console.log(cartera)
+        cartera = resultado[1]
+        console.log(cartera)
+        document.getElementById('cartera').innerText = cartera + "€"
+
+
+    </script>
+</body>
+</html>
