@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - compras</title>
+</head>
+<body>
+    <h1>Ejercicio 3 - compras</h1>
+    
+    <script>
+        var cartera = 100
+        var productos = [
+                            {  
+                                nombre : 'pasta',
+                                precio: 15,
+                                cantidad: 0
+                            },
+                            {  
+                                nombre : 'pan',
+                                precio: 1,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'cerveza',
+                                precio: 2,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'caba',
+                                precio: 10,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'cocacola',
+                                precio: 3,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'carne',
+                                precio: 5,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'verdura',
+                                precio: 3,
+                                cantidad: 2
+                            },
+                            {  
+                                nombre : 'bote lentejas',
+                                precio: 2,
+                                cantidad: 2
+                            }
+                        ]
+                        var carrito = []
+        do {
+            
+            do{
+                imprimeProductos(productos)
+                var productoEligido = preguntaProducto()
+                var producto = sacaObjectoProducto(productoEligido,productos)
+                // verificar si el nombre producto existe en los productos
+            }while(producto == undefined)
+            cartera = actualizaCartera(cartera, producto)
+            productos = actualizaProductos(producto,productos)
+            var carritoActualizado = añadeProductoAlCarrito(producto,carrito)
+            carrito = carritoActualizado
+            var respuesta = confirm("¿Quieres comprar otro producto?")
+            
+        }while(respuesta)
+        console.log("he salido del supermercado")
+        console.log(productos,carrito,cartera)
+
+        // funciones de utilidad
+        function imprimeProductos(productos){
+            for (const producto of productos) {
+                if(producto.cantidad <= 0)
+                    continue
+        
+                console.log("Producto: "+producto.nombre + " " +producto.precio + "€ " + producto.cantidad )
+            }
+        }
+
+        function preguntaProducto(){
+            var respuesta = prompt("¿Qué producto quieres añadir al carrito?")
+
+            return respuesta
+        }
+
+        function sacaObjectoProducto(nombreProducto,productos){
+            for (const producto of productos) {
+                if(nombreProducto != producto.nombre)
+                    continue
+                
+                return producto
+            }
+        }
+
+        function añadeProductoAlCarrito(producto,carrito){
+            // si ya tenemos un producto igual 
+                // actualizamos la cantidad
+            if(productoEnCarrito(producto,carrito)){
+                
+                for (let i = 0; i < carrito.length; i++) {
+                    const prod = carrito[i];
+                    if(prod.nombre == producto.nombre){
+                        carrito[i].cantidad++
+                        break
+                    }
+                }
+                return carrito
+            }
+            producto.cantidad++
+            carrito.push(producto)
+            return carrito
+        }
+
+        function productoEnCarrito(producto, carrito){
+            for (const prod of carrito) {
+                if(prod.nombre == producto.nombre)
+                    return true
+            }
+
+            return false
+        }
+
+        function actualizaCartera(cartera,producto){
+            return cartera - producto.precio
+        }
+
+        function actualizaProductos(producto,productos){
+            for (let i = 0; i < productos.length; i++) {
+                const prod = productos[i];
+                if(prod.nombre == producto.nombre){
+                    productos[i].cantidad--
+                    break
+                }
+            } 
+            return productos
+        }
+       
+        
+    </script>
+</body>
+</html>
